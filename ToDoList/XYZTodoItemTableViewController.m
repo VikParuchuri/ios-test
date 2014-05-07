@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *pointsDisplay;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property XYZAppDelegate *appDelegate;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
 
@@ -47,9 +49,37 @@
     [self.tableView reloadData];
 }
 
+- (void) deleteItem: (XYZToDoItem*) item{
+    [self.managedObjectContext deleteObject:[self selectOne:item.objectID]];
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+    [self loadInitialData];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self deleteItem:[self.toDoItems objectAtIndex:indexPath.row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:YES];
+    if (editing) {
+        self.addButton.enabled = NO;
+    } else {
+        self.addButton.enabled = YES;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = self.appDelegate.managedObjectContext;
     
@@ -101,7 +131,7 @@
     if([self.toDoItems count] == 0){
         XYZToDoItem *itemOne = [[XYZToDoItem alloc] init];
         itemOne.itemName = @"Add some Todo Items!";
-        [self.toDoItems addObject:itemOne];
+        [self addItem:itemOne];
     }
     
     [self updatePoints];

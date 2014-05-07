@@ -272,6 +272,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="AbB-RO-7OT" id="xPQ-Tf-rHz"/>
                         <outlet property="pointsDisplay" destination="WqM-Ez-9rG" id="kRx-k9-tYj"/>
                     </connections>
                 </tableViewController>
@@ -292,7 +293,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New To-Do" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nLF-al-AvQ">
-                                <rect key="frame" x="20" y="127" width="273" height="30"/>
+                                <rect key="frame" x="27" y="79" width="273" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -300,8 +301,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="nLF-al-AvQ" secondAttribute="trailing" constant="27" id="6hk-7B-lfj"/>
-                            <constraint firstItem="nLF-al-AvQ" firstAttribute="leading" secondItem="3KC-76-lgP" secondAttribute="leading" constant="20" id="Orn-Ge-7M0"/>
+                            <constraint firstAttribute="trailing" secondItem="nLF-al-AvQ" secondAttribute="trailing" constant="20" id="6hk-7B-lfj"/>
+                            <constraint firstItem="nLF-al-AvQ" firstAttribute="leading" secondItem="3KC-76-lgP" secondAttribute="leading" constant="27" id="Orn-Ge-7M0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Item" id="Y4i-Fj-0be">
